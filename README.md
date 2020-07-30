@@ -1,6 +1,6 @@
 # Introduction
 
-Aplikasi pencari teks pada subtitle video dengan menggunakan API dari [https://github.com/muh-hizbe/cari-teks-video](https://github.com/muh-hizbe/cari-teks-video)
+Aplikasi pencari teks pada subtitle video dengan menggunakan API dari [https://cari-teks-video-api.vercel.app/api/search](https://cari-teks-video-api.vercel.app/api/search)
 
 ## Contoh kasus
 
