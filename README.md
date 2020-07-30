@@ -16,4 +16,4 @@ Dan akan memberikan hasil kata yang dicari dan alamat video yang menuju lokasi t
 
 ## Demo
 
-[cari-teks-video.netlify.app](https://cari-teks-video.netlify.app/)
+[https://cari-teks-video.netlify.app](https://cari-teks-video.netlify.app/)
