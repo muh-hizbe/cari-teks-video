@@ -1,0 +1,10 @@
+body{
+    min-height: 100vh;
+}
+#app{
+    min-height: 95vh;
+}
+mark{
+    padding: 5px;
+    background-color: #f97dc5;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#7544ee" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari kata video</title>
+    <meta name="description" content="Aplikasi cari teks video" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="icon" href="images/icons/icon-72x72.png" type="image/gif" sizes="16x16">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+</head>
+<body class="">
+    <div id="app" class="mt-10 pb-10">
+        <div class="container mx-auto mb-10 px-20">
+            <h1 class="flex flex-wrap font-bold text-center p-5 justify-center text-xl text-indigo-500">
+                <span class="p-2 pr-1">
+                    CARI KATA PADA
+                </span>
+                <span class="bg-indigo-500 text-white p-2 pr-5 rounded-r-full">SUBTITLE VIDEO</span>
+            </h1>
+        </div>
+        <div class="container mx-auto px-10">
+            <div class="grid sm:grid-cols-2 sm:grid-cols-1 row justify-between">
+                <div class="sm:w-12/12 lg:w-12/12 mb-5">
+                    <div class="row w-full mb-4">
+                        <button @click="resetUrl" class="shadow-lg hover:shadow-none bg-indigo-500 sm:w-3/12 md:w-2/12 hover:bg-indigo-700 text-white font-semibold py-2 px-4 focus:outline-none focus:bg-indigo-800 focus:shadow-none rounded">reset</button>
+                        <input class="shadow-lg appearance-none border-none font-semibold rounded bg-white md:w-9/12 sm:w-12/12 py-2 px-3 text-gray-700 focus:outline-none focus:shadow-none focus:bg-gray-300" id="url" type="text" placeholder="Url video" v-model="url">
+                    </div>
+                    <div class="row w-full">
+                        <button @click="resetKey" class="shadow-lg hover:shadow-none bg-indigo-500 sm:w-3/12 md:w-2/12 hover:bg-indigo-700 text-white font-semibold py-2 px-4 focus:outline-none focus:bg-indigo-800 focus:shadow-none rounded">reset</button>
+                        <input class="shadow-lg appearance-none border-none font-semibold rounded bg-white sm:w-12/12 md:w-9/12 py-2 px-3 text-gray-700 focus:outline-none focus:shadow-none focus:bg-gray-300" id="query" type="text" placeholder="Kata kunci" v-model="query">
+                    </div>
+                </div>
+
+                <div class="sm:w-12/12 lg:w-12/12 xl:w-12/12 m-0 shadow-lg bg-white rounded border-l-4 border-indigo-500">
+                    <div class="w-full rounded overflow-hidden px-6 py-4">
+                        <div class="tracking-wide font-semibold">Total hasil : <span class="text-teal-500">{{ pagination.total }}</span></div>
+                        <div class="tracking-wide font-semibold">Halaman ke : <span class="text-teal-500">{{ pagination.page }}</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row flex gap-4 mt-4">
+                <div class="w-full">
+                    <button @click="first" class="shadow-lg hover:shadow-none hover:bg-purple-700 text-white font-semibold py-2 px-4 focus:bg-purple-800 focus:outline-none focus:shadow-none rounded mb-3" :class="(!pagination.first) ? 'cursor-not-allowed bg-gray-500':'cursor-allowed bg-purple-500'" :disabled="!pagination.first">First</button>
+                    <button @click="prev" class="shadow-lg hover:shadow-none hover:bg-indigo-700 text-white font-semibold py-2 px-4 focus:bg-indigo-800 focus:outline-none focus:shadow-none rounded mb-3" :class="(!pagination.prev) ? 'cursor-not-allowed bg-gray-500':'cursor-allowed bg-indigo-500'" :disabled="!pagination.prev">Prev</button>
+                    <button @click="next" class="shadow-lg hover:shadow-none hover:bg-indigo-700 text-white font-semibold py-2 px-4 focus:bg-indigo-800 focus:outline-none focus:shadow-none rounded mb-3" :class="(!pagination.next) ? 'cursor-not-allowed bg-gray-500':'cursor-allowed bg-indigo-500'" :disabled="!pagination.next">Next</button>
+                    <button @click="last" class="shadow-lg hover:shadow-none hover:bg-purple-700 text-white font-semibold py-2 px-4 focus:bg-purple-800 focus:outline-none focus:shadow-none rounded mb-3" :class="(!pagination.last) ? 'cursor-not-allowed bg-gray-500':'cursor-allowed bg-purple-500'" :disabled="!pagination.last">Last</button>
+                </div>                
+            </div>
+
+            <div id="result"></div>
+
+            <ul class="mb-5 bg-white">
+                <template v-if="respons.length > 0">
+                    <li v-for="(item, index) in respons" :key="index" class="divide-y divide-indigo-300 p-5">
+                        <div class="p-5 w-full">
+                            <div class="flex justify-between mb-5">
+                                <span class="font-semibold text-gray-700" v-html="item.text"></span>
+                                <a :href="`${url}&t=${item.start}s`" class="bg-red-600 hover:bg-red-800 font-bold py-1 px-2 rounded-r-full text-white text-xs focus:outline-none focus:bg-red-800" target="_blank">see here!</a>
+                            </div>
+                            <hr class="text-indigo-300">
+                        </div>
+                    </li>
+                </template>
+                <template v-else="respons.length > 0">
+                    <p class="text-center font-semibold text-red-400 p-10">Hasil tidak ditemukan</p>
+                </template>
+            </ul>            
+        </div>        
+    </div>    
+    <footer class="bottom-0 py-5">
+        <div class="container mx-auto">
+            <hr class="border-gray-300">
+            <div class="flex justify-between">
+                <div class="text-center font-semibold text-gray-700 mt-5">
+                        &copy;2020 Muhammad Hizbullah
+                </div>
+                <div class="flex">
+                    <div class="text-center font-semibold text-gray-700 mt-5">
+                        <a href="https://github.com/muh-hizbe" class="hover:text-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-500">Github</a>
+                        <a href="https://twitter.com/muh__hizbullah" class="hover:text-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-500">Twitter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./js/reg_sw.js"></script>
+</body>
+</html>
