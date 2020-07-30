@@ -1,6 +1,6 @@
 # Introduction
 
-Aplikasi pencari teks pada subtitle video
+Aplikasi pencari teks pada subtitle video dengan menggunakan API dari [https://github.com/muh-hizbe/cari-teks-video](https://github.com/muh-hizbe/cari-teks-video)
 
 ## Contoh kasus
 
@@ -12,6 +12,7 @@ Dan akan memberikan hasil kata yang dicari dan alamat video yang menuju lokasi t
 
 1. [VueJS 2.6.11](https://vuejs.org/)
 2. [Tailwindcss 1.6.0](https://tailwindcss.com/)
+3. Menerapkan PWA
 
 ## Demo
 
