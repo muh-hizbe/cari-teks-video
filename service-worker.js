@@ -10,28 +10,19 @@ if (workbox) {
 workbox.precaching.precacheAndRoute([
     { url: "/", revision: '1' },
     { url: "/index.html", revision: '1' },
-    { url: "/nav.html", revision: '1' },
-    { url: "/detail-team.html", revision: '1' },
-    { url: "/pages/champion.html", revision: '1' },
-    { url: "/pages/inggris.html", revision: '1' },
-    { url: "/pages/jerman.html", revision: '1' },
-    { url: "/pages/perancis.html", revision: '1' },
-    { url: "/pages/spanyol.html", revision: '1' },
-    { url: "/pages/saved.html", revision: '1' },
-    { url: "/css/materialize.min.css", revision: '1' },
-    { url: "/js/materialize.min.js", revision: '1' },
-    { url: "/js/nav.js", revision: '1' },
-    { url: "/js/api.js", revision: '2' },
-    { url: "/js/db.js", revision: '1' },
-    { url: "/js/idb.js", revision: '1' },
-    { url: "/js/reg_sw.js", revision: '1' },
-    { url: "/js/detail.js", revision: '1' },
-    { url: "/icon.png", revision: '1' },
-    { url: "/img/192.png", revision: '1' },
-    { url: "/img/512.png", revision: '1' },
     { url: "/manifest.json", revision: '1' },
-    { url: "/img/favicon.ico", revision: '1' },
-    { url: "/img/apple-touch-icon.png", revision: '1' }
+    { url: "/css/styles.css", revision: '1' },
+    { url: "/images/icons/icon-72x72.png", revision: '1' },
+    { url: "/images/icons/icon-92x92.png", revision: '1' },
+    { url: "/images/icons/icon-128x128.png", revision: '1' },
+    { url: "/images/icons/icon-144x144.png", revision: '1' },
+    { url: "/images/icons/icon-152x152.png", revision: '1' },
+    { url: "/images/icons/icon-192x192.png", revision: '1' },
+    { url: "/images/icons/icon-384x384.png", revision: '1' },
+    { url: "/images/icons/icon-512x512.png", revision: '1' },
+    { url: "/js/index.js", revision: '1' },
+    { url: "/js/vue.js", revision: '1' },
+    { url: "/js/reg_sw.js", revision: '1' },
 ], {
     ignoreUrlParametersMatching: [/.*/]
 });    
@@ -50,8 +41,15 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-  /^https:\/\/fonts\.googleapis\.com/,
+  /^https:\/\/cdn\.jsdelivr\.net/,
   workbox.strategies.staleWhileRevalidate({
-    cacheName: 'google-fonts-stylesheets',
+    cacheName: 'vuejs-cdn',
+  })
+);
+
+workbox.routing.registerRoute(
+  /^https:\/\/unpkg\.com/,
+  workbox.strategies.staleWhileRevalidate({
+    cacheName: 'tailwindcss-cdn',
   })
 );
