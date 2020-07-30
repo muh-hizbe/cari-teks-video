@@ -57,11 +57,11 @@
 
             <ul class="mb-5 bg-white">
                 <template v-if="respons.length > 0">
-                    <li v-for="(item, index) in respons" :key="index" class="divide-y divide-indigo-300 p-5">
-                        <div class="p-5 w-full">
+                    <li v-for="(item, index) in respons" :key="index" class="divide-y divide-indigo-300 py-5">
+                        <div class="py-5 w-full">
                             <div class="flex justify-between mb-5">
                                 <span class="font-semibold text-gray-700" v-html="item.text"></span>
-                                <a :href="`${url}&t=${item.start}s`" class="bg-red-600 hover:bg-red-800 font-bold py-1 px-2 rounded-r-full text-white text-xs focus:outline-none focus:bg-red-800" target="_blank">see here!</a>
+                                <span class="flex flex-no-wrap"><a :href="`${url}&t=${item.start}s`" class="bg-red-600 hover:bg-red-800 font-bold py-1 px-2 rounded-r-full text-white text-xs focus:outline-none focus:bg-red-800 no-wrap" target="_blank">see here!</a></span>
                             </div>
                             <hr class="text-indigo-300">
                         </div>
