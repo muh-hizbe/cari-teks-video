@@ -54,26 +54,87 @@
                         <button @click="next" class="shadow-lg hover:shadow-none hover:bg-indigo-700 text-white font-semibold py-2 px-4 focus:bg-indigo-800 focus:outline-none focus:shadow-none rounded mb-3" :class="(!pagination.next) ? 'cursor-not-allowed bg-gray-500':'cursor-allowed bg-indigo-500'" :disabled="!pagination.next">Next</button>
                         <button @click="last" class="shadow-lg hover:shadow-none hover:bg-purple-700 text-white font-semibold py-2 px-4 focus:bg-purple-800 focus:outline-none focus:shadow-none rounded mb-3" :class="(!pagination.last) ? 'cursor-not-allowed bg-gray-500':'cursor-allowed bg-purple-500'" :disabled="!pagination.last">Last</button>
                     </div>                
-                </div>
+                </div>                
+                
+                <!-- <template>
+                    <span id="loading"></span>
+                </template> -->
+                <template v-if="!isLoaded">
+                    <span id="loading">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            style="margin: auto; background: none; display: block; shape-rendering: auto;" width="231px"
+                            height="231px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                            <circle cx="84" cy="50" r="10" fill="#9b56f1">
+                                <animate attributeName="r" repeatCount="indefinite" dur="0.3623188405797101s"
+                                    calcMode="spline" keyTimes="0;1" values="5;0" keySplines="0 0.5 0.5 1" begin="0s">
+                                </animate>
+                                <animate attributeName="fill" repeatCount="indefinite" dur="1.4492753623188404s"
+                                    calcMode="discrete" keyTimes="0;0.25;0.5;0.75;1"
+                                    values="#9b56f1;#f1c8fe;#d3a6f1;#b885f8;#9b56f1" begin="0s"></animate>
+                            </circle>
+                            <circle cx="16" cy="50" r="10" fill="#9b56f1">
+                                <animate attributeName="r" repeatCount="indefinite" dur="1.4492753623188404s"
+                                    calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;5;5;5"
+                                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="0s">
+                                </animate>
+                                <animate attributeName="cx" repeatCount="indefinite" dur="1.4492753623188404s"
+                                    calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84"
+                                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="0s">
+                                </animate>
+                            </circle>
+                            <circle cx="50" cy="50" r="10" fill="#b885f8">
+                                <animate attributeName="r" repeatCount="indefinite" dur="1.4492753623188404s"
+                                    calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;5;5;5"
+                                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+                                    begin="-0.3623188405797101s"></animate>
+                                <animate attributeName="cx" repeatCount="indefinite" dur="1.4492753623188404s"
+                                    calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84"
+                                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+                                    begin="-0.3623188405797101s"></animate>
+                            </circle>
+                            <circle cx="84" cy="50" r="10" fill="#d3a6f1">
+                                <animate attributeName="r" repeatCount="indefinite" dur="1.4492753623188404s"
+                                    calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;5;5;5"
+                                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+                                    begin="-0.7246376811594202s"></animate>
+                                <animate attributeName="cx" repeatCount="indefinite" dur="1.4492753623188404s"
+                                    calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84"
+                                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+                                    begin="-0.7246376811594202s"></animate>
+                            </circle>
+                            <circle cx="16" cy="50" r="10" fill="#f1c8fe">
+                                <animate attributeName="r" repeatCount="indefinite" dur="1.4492753623188404s"
+                                    calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;5;5;5"
+                                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+                                    begin="-1.0869565217391304s"></animate>
+                                <animate attributeName="cx" repeatCount="indefinite" dur="1.4492753623188404s"
+                                    calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84"
+                                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+                                    begin="-1.0869565217391304s"></animate>
+                            </circle>
+                            <!-- [ldio] generated by https://loading.io/ -->
+                        </svg>
+                    </span>
+                </template>
 
-                <div id="result"></div>
-
-                <ul class="mb-5 bg-white">
-                    <template v-if="respons.length > 0">
-                        <li v-for="(item, index) in respons" :key="index" class="divide-y divide-indigo-300 py-5">
-                            <div class="py-5 w-full">
-                                <div class="flex justify-between mb-5">
-                                    <span class="font-semibold text-gray-700" v-html="item.text"></span>
-                                    <span class="flex flex-no-wrap"><a :href="`${url}&t=${item.start}s`" class="bg-red-600 hover:bg-red-800 font-bold py-1 px-2 rounded-r-full text-white text-xs focus:outline-none focus:bg-red-800 no-wrap" target="_blank">see here!</a></span>
+                <template v-else>
+                    <ul class="mb-5 bg-white">
+                        <template v-if="respons.length > 0">
+                            <li v-for="(item, index) in respons" :key="index" class="divide-y divide-indigo-300 py-5">
+                                <div class="py-5 w-full">
+                                    <div class="flex justify-between mb-5">
+                                        <span class="font-semibold text-gray-700" v-html="item.text"></span>
+                                        <span class="flex flex-no-wrap"><a :href="`${url}&t=${item.start}s`" class="bg-red-600 hover:bg-red-800 font-bold py-1 px-2 rounded-r-full text-white text-xs focus:outline-none focus:bg-red-800 no-wrap" target="_blank">see here!</a></span>
+                                    </div>
+                                    <hr class="text-indigo-300">
                                 </div>
-                                <hr class="text-indigo-300">
-                            </div>
-                        </li>
-                    </template>
-                    <template v-else="respons.length > 0">
-                        <p class="text-center font-semibold text-red-400 p-10">Hasil tidak ditemukan</p>
-                    </template>
-                </ul>            
+                            </li>
+                        </template>
+                        <template v-else="respons.length > 0">
+                            <p class="text-center font-semibold text-red-400 p-10">Hasil tidak ditemukan</p>
+                        </template>
+                    </ul>  
+                </template>                
             </div>        
         </div>  
     </main>
@@ -83,11 +144,12 @@
             <hr class="border-gray-300">
             <div class="flex justify-between">
                 <div class="text-center font-semibold text-gray-700 mt-5">
-                        &copy;2020 Muhammad Hizbullah
+                        &copy;2020 M Hizbullah
                 </div>
                 <div class="flex">
                     <div class="text-center font-semibold text-gray-700 mt-5">
                         <a href="https://github.com/muh-hizbe" class="hover:text-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-500">Github</a>
+                        |
                         <a href="https://twitter.com/muh__hizbullah" class="hover:text-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-500">Twitter</a>
                     </div>
                 </div>
