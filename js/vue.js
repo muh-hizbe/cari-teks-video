@@ -16,36 +16,36 @@ new Vue({
     },
     watch: {
         query: pDebounce(function query(query) {            
-                this.search(query, this.url)  
+                this.search(query, this.url);
         }, 500)
     },
-    updated(){
+    updated() {
         setTimeout(
-            ()=> {
+            () => {
                 this.isLoaded = true;
             }
-        ,1000)
+        , 1000);
     },
     methods: {
-        resetKey(){
+        resetKey() {
             this.query = '';
         },
-        resetUrl(){
+        resetUrl() {
             this.url = '';
         },
-        first(){     
+        first() {     
             this.search(this.query, this.url, this.pagination.first)                        
         },
-        last(){      
+        last() {      
             this.search(this.query, this.url, this.pagination.last)                        
         },
-        prev(){      
+        prev() {      
             this.search(this.query, this.url, this.pagination.prev)                        
         },
-        next(){
+        next() {
             this.search(this.query, this.url, this.pagination.next)                        
         },
-        async search(query, url, pagination){   
+        async search(query, url, pagination) {   
             if (query === '') {            
                 this.isLoaded = true;                  
             } else {                
